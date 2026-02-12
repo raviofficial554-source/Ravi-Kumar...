@@ -1,1 +1,578 @@
-Ravi personal.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAVI KUMAR - Personal Profile</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      overflow: hidden;
+      animation: fadeIn 1s ease-in-out;
+      position: relative;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(45deg, rgba(255,107,107,0.1), rgba(254,202,87,0.1));
+      border-radius: 15px;
+      animation: pulse 3s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .header {
+      background: linear-gradient(45deg, #ff6b6b, #feca57);
+      color: white;
+      text-align: center;
+      padding: 40px 20px 25px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* PHOTO */
+    .profile-pic {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 5px solid white;
+      margin: 0 auto 18px;
+      overflow: hidden;
+      background: #eee;
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .profile-pic:hover { transform: rotate(5deg) scale(1.06); }
+
+    .header h1 {
+      background: linear-gradient(45deg, #fff, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: textGlow 2s ease-in-out infinite alternate;
+      margin: 0;
+      font-size: 38px;
+      letter-spacing: 1px;
+    }
+
+    @keyframes textGlow {
+      from { text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+      to { text-shadow: 0 0 20px rgba(255,215,0,1); }
+    }
+
+    .header p {
+      margin: 8px 0 0;
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    /* ACTION BUTTONS */
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 22px rgba(0,0,0,0.2);
+    }
+
+    .btn-download {
+      background: white;
+      color: #ff6b6b;
+    }
+
+    .btn-download:hover {
+      background: #fff3f3;
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .btn-whatsapp:hover {
+      filter: brightness(0.95);
+    }
+
+    .content { padding: 30px; position: relative; z-index: 1; }
+
+    .section {
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .section.animate { opacity: 1; transform: translateX(0); }
+    .section:nth-child(even) { transform: translateX(50px); }
+    .section:nth-child(even).animate { transform: translateX(0); }
+
+    .section h2 {
+      border-bottom: 2px solid #ff6b6b;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+      color: #ff6b6b;
+      transition: color 0.3s ease;
+    }
+
+    .section h2:hover { color: #e55a5a; }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
+      word-break: break-word;
+      gap: 10px;
+    }
+
+    .info-item:hover { transform: translateX(10px); }
+
+    .info-item i {
+      color: #667eea;
+      width: 22px;
+      transition: color 0.3s ease;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .info-item:hover i { color: #ff6b6b; }
+
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .skill {
+      background: #f0f0f0;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .skill:hover {
+      background: #ff6b6b;
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+    }
+
+    .experience-item, .education-item {
+      margin-bottom: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    .experience-item:hover, .education-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      background: rgba(0,0,0,0.02);
+    }
+
+    .experience-item h3, .education-item h3 {
+      margin: 0 0 10px 0;
+      color: #333;
+    }
+
+    .experience-item p, .education-item p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    ul { padding-left: 18px; }
+
+    .languages { display: flex; flex-wrap: wrap; gap: 15px; }
+
+    .language {
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      min-width: 110px;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .language::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6b6b, #feca57);
+      width: 0%;
+      transition: width 1s ease;
+    }
+
+    .language:hover::after { width: 100%; }
+    .language:hover { transform: scale(1.05); }
+
+    .language strong { display: block; font-size: 16px; }
+    .language span { font-size: 14px; color: #666; }
+
+    .share-section { text-align: center; margin-top: 30px; }
+
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .share-btn {
+      display: inline-block;
+      padding: 10px 15px;
+      background: #667eea;
+      color: white;
+      text-decoration: none;
+      border-radius: 7px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .share-btn:hover {
+      background: #5a67d8;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+    }
+
+    .share-btn i { margin-right: 6px; }
+
+    /* FLOATING WHATSAPP BUTTON */
+    .whatsapp-float {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 26px;
+      text-decoration: none;
+      box-shadow: 0 12px 22px rgba(0,0,0,0.25);
+      transition: all 0.3s ease;
+      z-index: 9999;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+      filter: brightness(0.95);
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      body { padding: 10px; }
+      .container { margin: 10px; }
+      .header { padding: 25px 15px 18px; }
+      .header h1 { font-size: 30px; }
+      .content { padding: 18px; }
+      .share-buttons { flex-direction: column; align-items: center; }
+      .share-btn { width: 90%; text-align: center; }
+      .languages { flex-direction: column; }
+      .language { width: 100%; }
+      .btn { width: 90%; justify-content: center; }
+    }
+
+    @media print {
+      body { background: white; }
+      .container { box-shadow: none; animation: none; }
+      .section { opacity: 1; transform: none; }
+      .share-section { display: none; }
+      .whatsapp-float { display: none; }
+      .action-buttons { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+
+      <!-- PHOTO -->
+      <div class="profile-pic">
+        <img src="ravi.jpg" alt="Ravi Kumar" onerror="this.src='https://via.placeholder.com/130';">
+      </div>
+
+      <h1>RAVI KUMAR</h1>
+      <p>IT Analyst & HR Executive</p>
+
+      <!-- ACTION BUTTONS -->
+      <div class="action-buttons">
+        <!-- Resume file name: resume.pdf -->
+        <a class="btn btn-download" href="resume.pdf" download>
+          <i class="fas fa-download"></i> Download Resume
+        </a>
+
+        <!-- WhatsApp Direct -->
+        <a class="btn btn-whatsapp" id="waDirectTop" target="_blank">
+          <i class="fab fa-whatsapp"></i> WhatsApp Me
+        </a>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div class="section">
+        <h2>About Me</h2>
+        <p>
+          Dynamic IT Analyst with a proven track record at Natural Capsule Limited, excelling in system analysis and
+          technical troubleshooting. Adept at enhancing IT infrastructure efficiency and optimizing workflows through data
+          analysis. Strong collaborator with excellent problem-solving skills, committed to delivering impactful
+          technology solutions and user training.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>Contact Information</h2>
+        <div class="info-item">
+          <i class="fas fa-envelope"></i>
+          <span>ravioffical554@gmail.com</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-phone"></i>
+          <span>9731766288</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Bengaluru, India 562107</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Skills</h2>
+        <div class="skills">
+          <span class="skill">Teamwork</span>
+          <span class="skill">Technical Support</span>
+          <span class="skill">Active Listening</span>
+          <span class="skill">Problem Solving</span>
+          <span class="skill">Virtualization</span>
+          <span class="skill">Digital Transformation</span>
+          <span class="skill">Time Management</span>
+          <span class="skill">Machine Learning</span>
+          <span class="skill">Multitasking</span>
+          <span class="skill">System Analysis</span>
+          <span class="skill">Software Development</span>
+          <span class="skill">Network Security</span>
+          <span class="skill">Web Development</span>
+          <span class="skill">Technical Troubleshooting</span>
+          <span class="skill">Customer Support</span>
+          <span class="skill">Software Implementation</span>
+          <span class="skill">IT Performance Reports</span>
+          <span class="skill">Data Analysis</span>
+          <span class="skill">Network Administration</span>
+          <span class="skill">Process Optimization</span>
+          <span class="skill">Incident Management</span>
+          <span class="skill">Report Development</span>
+          <span class="skill">Data Mining</span>
+          <span class="skill">User Training</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Experience</h2>
+
+        <div class="experience-item">
+          <h3>HR Executive</h3>
+          <p><strong>Munn Engineers and Developers Pvt. Ltd. (Deployed at Jindal Steel & Power Ltd.) | Odisha, Angul</strong></p>
+          <p><em>20/10/2025 – Current</em></p>
+          <ul>
+            <li>Managed end-to-end recruitment activities including sourcing, screening, shortlisting, and coordinating interviews.</li>
+            <li>Handled onboarding formalities, documentation, and induction of new employees at the project site.</li>
+            <li>Maintained employee records, attendance, and leave management, ensuring compliance.</li>
+            <li>Coordinated with site managers for manpower planning, grievance handling, and engagement.</li>
+          </ul>
+        </div>
+
+        <div class="experience-item">
+          <h3>IT Analyst</h3>
+          <p><strong>Natural Capsule Limited | Bengaluru, India</strong></p>
+          <p><em>03/2024 – 09/2025</em></p>
+          <ul>
+            <li>Analyzed system requirements to improve IT infrastructure efficiency.</li>
+            <li>Collaborated with cross-functional teams to deliver technology solutions.</li>
+            <li>Supported software implementation by troubleshooting technical issues.</li>
+            <li>Maintained network security through creation of protocols.</li>
+            <li>Provided technical support and resolved IT-related incidents.</li>
+          </ul>
+        </div>
+
+        <div class="experience-item">
+          <h3>Sales Invoice Expert & IT Executive</h3>
+          <p><strong>Digiviya Plastics & Alloy Pvt. Ltd | Bengaluru, India</strong></p>
+          <p><em>05/2023 – 03/2024</em></p>
+          <ul>
+            <li>Experience in TCSION, TCS SAP and IT support.</li>
+            <li>Ensured invoice accuracy and workflow compliance.</li>
+            <li>Trained employees on SOPs and workplace safety.</li>
+          </ul>
+        </div>
+
+        <div class="experience-item">
+          <h3>Data Analyst</h3>
+          <p><strong>Blinkit | Bengaluru, India</strong></p>
+          <p><em>06/2022 – 02/2023</em></p>
+          <ul>
+            <li>Analyzed data trends for business insights.</li>
+            <li>Developed SQL and Excel-based reports.</li>
+            <li>Identified workflow inefficiencies.</li>
+            <li>Supported returns department operations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Education</h2>
+
+        <div class="education-item">
+          <h3>Bachelor of Computer Applications</h3>
+          <p><strong>Bangalore University | Bengaluru, India</strong></p>
+          <p>GPA: 7.6</p>
+        </div>
+
+        <div class="education-item">
+          <h3>Prashasthi PU College</h3>
+          <p><strong>Bengaluru, Karnataka</strong></p>
+          <p>Score: 78%</p>
+        </div>
+
+        <div class="education-item">
+          <h3>DVM Public School</h3>
+          <p><strong>Bihar, India</strong></p>
+          <p>Score: 82%</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Languages</h2>
+        <div class="languages">
+          <div class="language"><strong>English</strong><span>90%</span></div>
+          <div class="language"><strong>Hindi</strong><span>100%</span></div>
+          <div class="language"><strong>Kannada</strong><span>100%</span></div>
+          <div class="language"><strong>Telugu</strong><span>40%</span></div>
+          <div class="language"><strong>Tamil</strong><span>60%</span></div>
+        </div>
+      </div>
+
+      <div class="share-section section">
+        <h2>Share This Profile</h2>
+
+        <div class="share-buttons">
+          <a id="fbShare" class="share-btn" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a id="twShare" class="share-btn" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+          <a id="liShare" class="share-btn" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+          <a id="waShare" class="share-btn" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+
+        <p style="margin-top: 15px; font-size: 12px; color: #666;">
+          Once your site is live, sharing buttons will automatically work.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Button -->
+  <a class="whatsapp-float" id="waFloat" target="_blank" title="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    // Scroll animations
+    const sections = document.querySelectorAll('.section');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('animate');
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Share buttons (auto detect URL)
+    const YOUR_URL = window.location.href;
+
+    document.getElementById("fbShare").href =
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(YOUR_URL)}`;
+
+    document.getElementById("twShare").href =
+      `https://twitter.com/intent/tweet?url=${encodeURIComponent(YOUR_URL)}&text=${encodeURIComponent("Check out my profile!")}`;
+
+    document.getElementById("liShare").href =
+      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(YOUR_URL)}`;
+
+    document.getElementById("waShare").href =
+      `https://wa.me/?text=${encodeURIComponent("Check out this profile: " + YOUR_URL)}`;
+
+    // WhatsApp Direct Chat (Your number)
+    const WHATSAPP_NUMBER = "919731766288"; // ✅ country code + number
+    const WA_TEXT = "Hello Ravi, I saw your profile website and want to connect.";
+
+    const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WA_TEXT)}`;
+
+    document.getElementById("waDirectTop").href = waLink;
+    document.getElementById("waFloat").href = waLink;
+  </script>
+</body>
+</html>
